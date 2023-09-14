@@ -1,11 +1,14 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { Status } from '../enums/status.enum';
+import { StatusRole } from '../enums/statusRole.enum';
 @Entity()
 export class Product {
   @PrimaryGeneratedColumn()
   code: number;
-  @Column()
-  status: Status;
+  @Column({
+    type: 'enum',
+    enum: StatusRole,
+  })
+  status: StatusRole;
   @Column()
   imported_t: Date;
   @Column()
@@ -38,9 +41,9 @@ export class Product {
   traces: string;
   @Column()
   serving_size: string;
-  @Column()
+  @Column('float')
   serving_quantity: number;
-  @Column()
+  @Column('int')
   nutriscore_score: number;
   @Column()
   nutriscore_grade: string;
