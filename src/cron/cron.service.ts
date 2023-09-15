@@ -25,7 +25,7 @@ export class CronService {
 
     // for (const fileUrl of fileUrls) {
     // }
-    this.lerUrl('index.txt');
+    //this.lerUrl('index.txt');
   }
 
   //   async lerArquivo(nomeArquivo: string) {
@@ -53,7 +53,7 @@ export class CronService {
   }
 
 
-  async pegarArquivo(fileStream : string) {
+//   async pegarArquivo(fileStream : string) {
 
-  }
+//   }
 }

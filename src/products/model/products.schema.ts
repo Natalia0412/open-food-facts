@@ -1,54 +1,58 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { StatusRole } from '../enums/statusRole.enum';
-@Entity()
-export class Product {
-  @PrimaryGeneratedColumn()
+import { Document } from 'mongoose';
+@Schema()
+export class Product extends Document {
+  @Prop()
   code: number;
-  @Column({
-    type: 'enum',
+  @Prop({
+    type: String,
     enum: StatusRole,
   })
   status: StatusRole;
-  @Column()
+  @Prop()
   imported_t: Date;
-  @Column()
+  @Prop()
   url: string;
-  @Column()
+  @Prop()
   creator: string;
-  @Column()
+  @Prop()
   created_t: Date;
-  @Column()
+  @Prop()
   last_modified_t: Date;
-  @Column()
+  @Prop()
   product_name: string;
-  @Column()
+  @Prop()
   quantity: string;
-  @Column()
+  @Prop()
   brands: string;
-  @Column()
+  @Prop()
   categories: string;
-  @Column()
+  @Prop()
   labels: string;
-  @Column()
+  @Prop()
   cities: string;
-  @Column()
+  @Prop()
   purchase_places: string;
-  @Column()
+  @Prop()
   stores: string;
-  @Column()
+  @Prop()
   ingredients_tex: string;
-  @Column()
+  @Prop()
   traces: string;
-  @Column()
+  @Prop()
   serving_size: string;
-  @Column('float')
+  @Prop()
   serving_quantity: number;
-  @Column('int')
+  @Prop()
   nutriscore_score: number;
-  @Column()
+  @Prop()
   nutriscore_grade: string;
-  @Column()
+  @Prop()
   main_category: string;
-  @Column()
+  @Prop()
   image_url: string;
 }
+
+export const ProductSchema = SchemaFactory.createForClass(Product);
