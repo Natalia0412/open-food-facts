@@ -3,8 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProductsModule } from './products/products.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { CronModule } from './cron/cron.module';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
@@ -14,21 +15,11 @@ import { CronModule } from './cron/cron.module';
       isGlobal: true,
       envFilePath: `.env.${process.env.NODE_ENV}`,
     }),
-    TypeOrmModule.forRootAsync({
+    MongooseModule.forRootAsync({
       inject: [ConfigService],
-      useFactory: (config: ConfigService) => {
-        return {
-          type: 'postgres',
-          database: config.get<string>('DATABASE_NAME'),
-          host: config.get<string>('DATABASE_HOST'),
-          port: config.get<number>('DATABASE_PORT'),
-          username: 'postgres',
-          password: 'senha',
-          synchronize: true,
-          entities: ['dist/**/*.entity.js'],
-          //logging: true,
-        };
-      },
+      useFactory: async (config: ConfigService) => ({
+        uri: config.get<string>('MONGODB_URI'),
+      }),
     }),
     CronModule,
   ],
